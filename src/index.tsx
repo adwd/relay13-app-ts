@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { RelayEnvironmentProvider } from 'react-relay';
+import { RelayEnvironment } from './relay';
 
 const root = (ReactDOM as any).createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
-    <App />
+    <RelayEnvironmentProvider environment={RelayEnvironment}>
+      <Suspense fallback={<h1>Loading Data...</h1>}>
+        <App />
+      </Suspense>
+    </RelayEnvironmentProvider>
   </React.StrictMode>
 );
 
